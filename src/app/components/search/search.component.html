@@ -1,8 +1,15 @@
 
-
-
-<form class="form-search">
-  <input type="text" name="q" placeholder="Search">
-
-  <button type="submit">GitHub Search</button>
+<form [formGroup]="form" class="form-search">
+  <input type="text" name="q" placeholder="Search" formControlName="query" autocomplete="off">
 </form>
+
+<ng-container *ngIf="form.value.query?.length >= 2">
+  <app-users-list *ngIf="results$ | async as results; else loadingError;" [users]="results" (leave)="reset()"></app-users-list>
+
+  <ng-template #loadingError>
+    <p *ngIf="error$ | async; else loading">Loading error, please try again.</p>
+    <ng-template #loading>
+      Loading...
+    </ng-template>
+  </ng-template>
+</ng-container>

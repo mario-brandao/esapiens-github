@@ -1,0 +1,11 @@
+
+<ul class="users-list">
+  <li *ngFor="let user of users" class="users-list-item">
+    <a [routerLink]="[userRoute, user.login]" class="user-data" (click)="navigateAway()">
+      <div class="user-thumbnail">
+        <img src="{{ user.avatar_url }}" alt="{{ user.login }}">
+      </div>
+      <h3 class="user-data-name">{{ user.login }}</h3>
+    </a>
+  </li>
+</ul>

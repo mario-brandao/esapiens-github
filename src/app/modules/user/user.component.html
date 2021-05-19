@@ -1,0 +1,14 @@
+
+<div *ngIf="user$ | async as user; else loadingError" class="user-details">
+  <div class="user-thumbnail">
+    <img src="{{ user.avatar_url }}" alt="{{ user.login }}">
+  </div>
+  <h2 class="user-name">{{ user.name }}</h2>
+</div>
+
+<ng-template #loadingError>
+  <div *ngIf="error$ | async; else loading">Loading error, try another user.</div>
+  <ng-template #loading>
+    Loading...
+  </ng-template>
+</ng-template>
