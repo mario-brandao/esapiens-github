@@ -1,0 +1,60 @@
+
+html {
+
+  // The following line enables REM usage in the scale of: 10px = 1rem
+  // for more intuitive styling flow
+  // So, 1.2rem equals to 12px, .5rem equals to 5px, and so forth
+  font-size: 62.5%;
+
+  * {
+    box-sizing: border-box;
+    line-height: 1.3;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+html, body {
+  font-family: $global-font, sans-serif;
+  color: $default-color;
+  background: $global-bg;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  ::-webkit-scrollbar {
+    width: 1.7rem;
+    cursor: pointer;
+  }
+  ::-webkit-scrollbar-track {
+    background: $black;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(white, .6);
+    border-radius: 20px;
+    border: 6px solid $black;
+  }
+
+  * {
+    font-family: $global-font, sans-serif;
+  }
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+a, button {
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  color: inherit;
+  text-decoration: none;
+  &:visited {
+    color: inherit;
+  }
+}
+
+.container {
+  width: 100%;
+  padding: 1.5rem;
+}

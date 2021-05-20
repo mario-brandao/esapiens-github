@@ -1,0 +1,47 @@
+@import 'src/assets/scss/utils/variables';
+
+:host {
+  .users-list {
+    height: 68vh;
+    margin-bottom: 2rem;
+    overflow: auto;
+
+    &-item {
+      width: 100%;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .user {
+    &-data {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-radius: 3px;
+      overflow: hidden;
+      background: $gray-dark;
+      &:hover {
+        .avatar-img {
+          transform: scale(1.1);
+        }
+      }
+      &-avatar {
+        flex-basis: 8rem;
+        border-radius: 3px 0 0 3px;
+        background: $black;
+      }
+      &-name {
+        flex-basis: calc(100% - 10rem);
+        max-width: calc(100% - 10rem);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 2rem;
+      }
+      .avatar-img {
+        transition: transform .4s ease;
+      }
+    }
+  }
+}

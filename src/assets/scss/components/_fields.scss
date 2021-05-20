@@ -1,0 +1,24 @@
+@import 'src/assets/scss/utils/mixins';
+@import 'src/assets/scss/utils/variables';
+
+.form-field {
+  background: transparent;
+  padding: 1.5rem;
+  border: 1px solid $white;
+  border-radius: 3px;
+  color: $white;
+  outline: 0;
+  transition: background .4s ease, box-shadow .4s ease;
+
+  @include placeholder {
+    font-family: $global-font, sans-serif;
+    color: $white;
+    opacity: .8;
+    transition: color .4s ease, opacity .4s ease;
+  }
+
+  &:focus {
+    box-shadow: 0 0 3px 0 rgba($white, .8);
+    background: $gray-dark;
+  }
+}

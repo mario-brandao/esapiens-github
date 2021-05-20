@@ -1,5 +1,17 @@
 
 
+// Utils
+@import './assets/scss/utils/variables';
+@import './assets/scss/utils/reset';
+
+// Libs
 @import '~ngx-toastr/toastr';
 
+// Layout
+@import './assets/scss/layout/fonts';
+@import './assets/scss/layout/icons';
+@import './assets/scss/layout/global';
 
+// Global Components
+@import './assets/scss/components/fields';
+@import './assets/scss/components/buttons';

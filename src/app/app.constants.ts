@@ -1,7 +1,7 @@
-
+import { environment } from "src/environments/environment";
 
 export class APP_CONSTANTS {
-  public static BASE_API = 'https://api.github.com/';
+  public static BASE_API = environment.API;
   public static API_TERMS = {
     USERS: 'users',
     SEARCH: 'search',

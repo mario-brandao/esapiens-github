@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { APP_CONSTANTS } from 'src/app/app.constants';
 import { User } from 'src/app/interfaces/user';
 
@@ -12,14 +12,15 @@ export class GitHubService {
 
   constructor(private httpClient: HttpClient) { }
 
-  searchUsers(query: string, page = 0, limit = 3): Observable<User[]> {
+  searchUsers(query: string, page = 1, limit = 15): Observable<any> {
     return this.httpClient.get<any>(
       `${APP_CONSTANTS.SEARCH_API}${APP_CONSTANTS.API_TERMS.USERS}?q=${query}&page=${page}&per_page=${limit}`
-    ).pipe(map(({items}) => {
-      console.log(items);
-
-      return items;
-    }));
+    ).pipe(
+      map(({items, total_count}) => {
+        return {users: items, length: total_count};
+      }),
+      catchError(error => throwError(error))
+    );
   }
 
   getUser(login: string): Observable<User> {

@@ -1,0 +1,25 @@
+
+@mixin reset-autocomplete-fields($element, $border-color: $white-dimmed) {
+  #{$element}:-webkit-autofill {
+    border: 2px solid $border-color;
+    border-top: none;
+    -webkit-text-fill-color: $border-color;
+    -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0) inset;
+    transition: background-color 5000s ease-in-out 0s, border-color .3s ease;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+
+.flex-host {
+  display: flex;
+  width: 100%;
+  flex-basis: 100%;
+  flex-wrap: wrap;
+}
