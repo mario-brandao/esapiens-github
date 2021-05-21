@@ -29,6 +29,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private gitHubService: GitHubService,
     private toastr: ToastrService,
   ) {
+    this.repos = [];
     this.subscriptions = new Subscription();
     this.getUserLoginParam();
   }

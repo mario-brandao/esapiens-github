@@ -1,2 +1,53 @@
 
-// TODO: component styles
+@import 'src/assets/scss/utils/variables';
+
+.repo {
+  &-details {
+    background: $gray-dark;
+    padding: 3rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    text-align: left;
+
+    .btn-primary {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &-name {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &-iconed-data-list,
+  &-language,
+  &-description {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  &-iconed-data {
+    display: inline-block;
+    margin-right: 3rem;
+    .fas {
+      font-size: 1.6rem;
+      margin-right: .5rem;
+    }
+  }
+
+  &-language {
+    .fab {
+      margin-left: 1rem;
+      font-size: 2.5rem;
+    }
+  }
+
+  &-description , &-language {
+    margin-top: 1rem;
+    &-title {
+      line-height: 2;
+      font-size: 1.8rem;
+    }
+  }
+
+}

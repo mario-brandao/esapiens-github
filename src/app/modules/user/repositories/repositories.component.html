@@ -10,25 +10,8 @@
   <div *ngFor="let repo of repos" class="repo-card">
     <h3 class="repo-name">{{ repo.name }}</h3>
 
-    <p *ngIf="repo.stargazers_count" class="repo-stars">
-      <i class="fas fa-star"></i>
-      Stars {{ repo.stargazers_count }}
-    </p>
-    <p *ngIf="repo.watchers" class="repo-watchers">
-      <i class="fas fa-eye"></i>
-      Watchers {{ repo.watchers }}
-    </p>
-    <p *ngIf="repo.forks" class="repo-forks">
-      <i class="fas fa-code-branch"></i>
-      Forks {{ repo.forks }}
-    </p>
-    <p *ngIf="repo.open_issues" class="repo-issues">
-      <i class="fas fa-exclamation-circle"></i>
-      Open_issues {{ repo.open_issues }}
-    </p>
-    <p *ngIf="repo.language" class="repo-language">
-      <b class="repo-language-title">Language:</b><br>
-      {{ repo.language }} <i class="fab fa-{{ repo.language | lowercase }}"></i>
+    <p class="repo-stars">
+      <i class="fas fa-star"></i> {{ repo.stargazers_count || '0' }}
     </p>
     <p *ngIf="repo.description" class="repo-description">
       <b class="repo-description-title">Description:</b><br>

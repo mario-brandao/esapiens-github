@@ -59,4 +59,9 @@ export class RepositoryDetailsComponent implements AfterViewInit {
     );
     this.subscriptions.add(reposObs);
   }
+
+  hasAnyData(): boolean {
+    const {stargazers_count, watchers, forks, open_issues} = this.repo;
+    return !!(stargazers_count || watchers || forks || open_issues);
+  }
 }

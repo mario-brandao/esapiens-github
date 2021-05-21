@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { SharedModule } from './modules/shared/shared.module';
 import { GitHubService } from './services/github/github.service';
 
 
@@ -27,6 +28,7 @@ import { GitHubService } from './services/github/github.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    SharedModule
   ],
   providers: [
     GitHubService

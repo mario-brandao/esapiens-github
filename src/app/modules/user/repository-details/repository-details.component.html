@@ -1,3 +1,38 @@
 
-<!-- TODO: place component contents -->
-<a *ngIf="repo?.html_url" [href]="repo.html_url" target="_blank">View GitHub</a>
+
+
+<div class="container">
+  <div class="row center-xs">
+    <div *ngIf="repo" class="repo-details col-xs-12 col-md-8 col-lg-6">
+
+      <h2 class="repo-name">{{ repo.name }}</h2>
+
+      <p *ngIf="hasAnyData()" class="repo-iconed-data-list">
+        <span *ngIf="repo.stargazers_count" title="Stars" class="repo-iconed-data">
+          <i class="fas fa-star"></i> {{ repo.stargazers_count || '0' }}
+        </span>
+        <span *ngIf="repo.watchers" title="Watchers" class="repo-iconed-data">
+          <i class="fas fa-eye"></i> {{ repo.watchers }}
+        </span>
+        <span *ngIf="repo.forks" title="Forks" class="repo-iconed-data">
+          <i class="fas fa-code-branch"></i> {{ repo.forks }}
+        </span>
+        <span *ngIf="repo.open_issues" title="Open issues" class="repo-iconed-data">
+          <i class="fas fa-exclamation-circle"></i> {{ repo.open_issues }}
+        </span>
+      </p>
+
+      <p *ngIf="repo.language" class="repo-language">
+        <b class="repo-language-title">Language:</b><br>
+        {{ repo.language }} <i class="fab fa-{{ repo.language | lowercase }}"></i>
+      </p>
+
+      <p *ngIf="repo.description" class="repo-description">
+        <b class="repo-description-title">Description:</b><br>
+        {{ repo.description }}
+      </p>
+
+      <a *ngIf="repo?.html_url" [href]="repo.html_url" target="_blank" class="btn-primary highlighted">View GitHub</a>
+    </div>
+  </div>
+</div>

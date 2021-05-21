@@ -25,25 +25,18 @@
   }
 
   &-name {
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 1.5rem;
   }
 
   &-stars,
-  &-watchers,
-  &-forks,
-  &-issues,
-  &-language,
   &-description {
-    position: relative;
     font-size: 1.4rem;
     margin-bottom: 1rem;
   }
 
-  &-stars,
-  &-watchers,
-  &-forks,
-  &-issues {
+  &-stars {
+    position: relative;
     padding-left: 3rem;
     .fas {
       position: absolute;
@@ -56,6 +49,7 @@
   &-language {
     .fab {
       margin-left: 1rem;
+      font-size: 2.5rem;
     }
   }
 
@@ -63,6 +57,7 @@
     margin-top: 1rem;
     &-title {
       line-height: 2;
+      font-size: 1.8rem;
     }
   }
 

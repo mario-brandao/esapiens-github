@@ -1,9 +1,20 @@
 
 <div class="search" [ngClass]="{cover: root || slideIn, root: root}">
-  <button class="search-close btn-clear" (click)="leave()">x</button>
+
+  <button class="search-close btn-clear" (click)="leave()">
+    <i class="fas fa-times"></i>
+  </button>
 
   <div class="container">
     <form [formGroup]="form" class="search-form row center-xs">
+
+      <button
+        *ngIf="!root && !slideIn"
+        class="app-back btn-clear"
+        (click)="navigateBack()">
+        <i class="fas fa-chevron-left"></i> back
+      </button>
+
       <input
         type="text"
         name="q"
@@ -16,6 +27,8 @@
 
     <div class="row center-xs">
       <div class="col-xs-12 col-md-8 col-lg-6">
+        <app-loader *ngIf="loading"></app-loader>
+
         <app-users-list
           *ngIf="results?.length; else loadingError;"
           [users]="results"
@@ -23,8 +36,6 @@
           (loadMore)="search(true)"
           (leave)="leave()">
         </app-users-list>
-
-        <p *ngIf="loading" class="app-loader">Loading...</p>
 
         <p *ngIf="loadingError">Loading error, please try again later.</p>
       </div>

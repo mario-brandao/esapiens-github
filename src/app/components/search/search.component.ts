@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -26,7 +27,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   slideIn: boolean;
   subscriptions: Subscription;
 
-  constructor(private gitHubService: GitHubService, private toastr: ToastrService) {
+  constructor(
+    private gitHubService: GitHubService,
+    private toastr: ToastrService,
+    private location: Location
+  ) {
     this.page = 1;
     this.currResultsLength = 0;
     this.slideIn = false;
@@ -82,6 +87,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   leave(): void {
     this.animateBack();
     this.reset();
+  }
+
+  navigateBack(): void {
+    this.location.back();
   }
 
   search(pagination?: boolean): void {
