@@ -29,6 +29,11 @@
     font-size: 1.4rem;
   }
 
+  &-repos-title {
+    font-size: 2.5rem;
+    margin: 1.5rem 0;
+  }
+
   @media (min-width: $md) {
     &-name {
       font-size: 3rem;

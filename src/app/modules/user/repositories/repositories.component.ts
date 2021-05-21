@@ -18,6 +18,9 @@ export class RepositoriesComponent implements AfterViewInit, OnDestroy {
   loadingRepos: boolean;
   loadingReposError: boolean;
   repoDetails: string;
+
+  isSortingDesc: boolean;
+
   subscriptions: Subscription;
 
   constructor(
@@ -43,6 +46,7 @@ export class RepositoriesComponent implements AfterViewInit, OnDestroy {
     const reposObs = this.gitHubService.getRepos(this.user).subscribe(
       (repos: Repository[]) => {
         this.repos = repos;
+        this.sortDesc();
       }, (error) => {
         this.toastr.error(error.message);
         this.loadingReposError = true;
@@ -53,6 +57,18 @@ export class RepositoriesComponent implements AfterViewInit, OnDestroy {
     this.subscriptions.add(reposObs);
   }
 
-  // TODO: sort repos by stargazers_count
+  toggleSort(): void {
+    this.isSortingDesc = !this.isSortingDesc;
+    if (this.isSortingDesc) {
+      this.repos.sort((a, b) => (a.stargazers_count < b.stargazers_count) ? 1 : ((b.stargazers_count < a.stargazers_count) ? -1 : 0));
+    } else {
+      this.repos.sort((a, b) => (a.stargazers_count > b.stargazers_count) ? 1 : ((b.stargazers_count > a.stargazers_count) ? -1 : 0));
+    }
+  }
+
+  sortDesc(): void {
+    this.isSortingDesc = true;
+    this.repos.sort((a, b) => (a.stargazers_count < b.stargazers_count) ? 1 : ((b.stargazers_count < a.stargazers_count) ? -1 : 0));
+  }
 
 }

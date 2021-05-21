@@ -20,10 +20,13 @@
               <app-tag [data]="user.followers" info="Followers"></app-tag>
               <app-tag [data]="user.following" info="Following"></app-tag>
             </div>
+            <div class="col-xs-12">
+              <h3 class="user-repos-title">Repositories</h3>
+              <app-repositories [repos]="repos" [user]="userLoginParam"></app-repositories>
+            </div>
           </div>
         </div>
 
-        <app-repositories [repos]="repos" [user]="userLoginParam"></app-repositories>
 
       </div>
     </div>

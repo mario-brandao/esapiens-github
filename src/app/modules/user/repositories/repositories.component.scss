@@ -1,3 +1,69 @@
+@import 'src/assets/scss/utils/variables';
 
 
-// TODO: component styles
+.repos {
+  &-sort {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+
+    .btn-primary {
+      margin-left: 1rem;
+    }
+  }
+}
+
+.repo {
+  &-card {
+    background: $gray-dark;
+    padding: 3rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+
+    .btn-primary {
+      margin-top: .5rem;
+    }
+  }
+
+  &-name {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  &-stars,
+  &-watchers,
+  &-forks,
+  &-issues,
+  &-language,
+  &-description {
+    position: relative;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  &-stars,
+  &-watchers,
+  &-forks,
+  &-issues {
+    padding-left: 3rem;
+    .fas {
+      position: absolute;
+      left: 1rem;
+      transform: translateX(-50%);
+      font-size: 1.6rem;
+    }
+  }
+
+  &-language {
+    .fab {
+      margin-left: 1rem;
+    }
+  }
+
+  &-description , &-language {
+    margin-top: 1rem;
+    &-title {
+      line-height: 2;
+    }
+  }
+
+}

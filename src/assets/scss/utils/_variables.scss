@@ -8,17 +8,21 @@ $bold: 700;
 $white: #fafafa;
 $black: #1e1e1e;
 $gray-dark: #2a2a2c;
-$purple: #6746ed;
 $green: #4febc8;
 $red: #f24646;
 
+$purple-light: #7a00ff;
+$purple: #6746ed;
+$purple-dark: #4627c7;
+
+// Global config
 $default-color: $white;
 $global-bg: $black;
 $global-font: 'Montserrat';
-$fa-font-path: 'src/assets/fontawesome';
+$fa-font-path: '/assets/fontawesome/';
 $outer-margin: 4rem;
 
-
+// Screen sizes
 $sm: 48em;
 $md: 62em;
 $lg: 75em;

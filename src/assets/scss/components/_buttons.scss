@@ -6,3 +6,71 @@
   color: inherit;
   font-size: 1.6rem;
 }
+
+.btn-primary {
+  display: inline-block;
+  background: $gray-dark;
+  appearance: none;
+  border: 4px solid $purple;
+  color: inherit;
+  font-size: 1.6rem;
+  padding: .5rem 1.5rem;
+  border-radius: 3px;
+  transition: background .3s ease;
+
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 0;
+
+  &.highlighted {
+    background: $purple;
+    &:hover {
+      &:before {
+        opacity: 1;
+      }
+    }
+    &:before {
+      background: linear-gradient(45deg, #{$purple}, #{$green}, #{$red});
+      background-size: 400%;
+    }
+    &:after {
+      background: $purple;
+    }
+  }
+
+  &:before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: -2px;
+    left:-2px;
+    background: linear-gradient(45deg, #{$purple}, #{$purple-light}, #{$purple-dark});
+    background-size: 400%;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 4px;
+  }
+
+  &:after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: $gray-dark;
+    border-radius: 4px;
+  }
+
+  &:hover {
+    &:before {
+      opacity: 1;
+    }
+  }
+}

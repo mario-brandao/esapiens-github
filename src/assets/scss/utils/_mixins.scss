@@ -16,10 +16,15 @@
   &:-ms-input-placeholder      {@content}
 }
 
-
 .flex-host {
   display: flex;
   width: 100%;
   flex-basis: 100%;
   flex-wrap: wrap;
+}
+
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 400% 0; }
+  100% { background-position: 0 0; }
 }
