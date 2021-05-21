@@ -1,0 +1,41 @@
+@import 'src/assets/scss/utils/variables';
+
+
+.user {
+  &-details {
+    text-align: left;
+  }
+  &-avatar {
+    background: $black;
+    border: 4px solid $white;
+    margin-bottom: 1.5rem;
+    &-img {
+      width: 100%;
+    }
+  }
+  &-name {
+    font-size: 2rem;
+  }
+  &-company {
+    font-weight: $regular;
+    margin-bottom: 1.5rem;
+  }
+  &-company,
+  &-email {
+    font-size: 1.2rem;
+    color: rgba($white, .8);
+  }
+  &-bio {
+    font-size: 1.4rem;
+  }
+
+  @media (min-width: $md) {
+    &-name {
+      font-size: 3rem;
+    }
+    &-company,
+    &-email {
+      font-size: 1.4rem;
+    }
+  }
+}

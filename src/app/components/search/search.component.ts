@@ -90,25 +90,27 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     const page = pagination ? this.page : 1;
 
-    const searchObservable = this.gitHubService.searchUsers(this.queryStr, page).subscribe(({users, length}) => {
-      const animationTimeout = this.slideIn === true ? 0 : 390;
+    const searchObs = this.gitHubService.searchUsers(this.queryStr, page).subscribe(
+      ({users, length}) => {
+        const animationTimeout = this.slideIn === true ? 0 : 390;
 
-      this.animateResults();
+        this.animateResults();
 
-      setTimeout(() => {
-        this.currResultsLength += length;
-        this.currQueryLength = length;
-        this.page++;
-        this.results.push(...users);
-      }, animationTimeout);
+        setTimeout(() => {
+          this.currResultsLength += length;
+          this.currQueryLength = length;
+          this.page++;
+          this.results.push(...users);
+        }, animationTimeout);
 
-    }, ({error}) => {
-      this.toastr.error(error.message);
-    }, () => {
-      this.loading = false;
-    });
+      }, ({error}) => {
+        this.toastr.error(error.message);
+      }, () => {
+        this.loading = false;
+      }
+    );
 
-    this.subscriptions.add(searchObservable);
+    this.subscriptions.add(searchObs);
   }
 
   get queryStr(): string {

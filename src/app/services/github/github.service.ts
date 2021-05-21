@@ -12,7 +12,7 @@ export class GitHubService {
 
   constructor(private httpClient: HttpClient) { }
 
-  searchUsers(query: string, page = 1, limit = 15): Observable<any> {
+  searchUsers(query: string, page = 1, limit = 15): Observable<{users: User[], length: number}> {
     return this.httpClient.get<any>(
       `${APP_CONSTANTS.SEARCH_API}${APP_CONSTANTS.API_TERMS.USERS}?q=${query}&page=${page}&per_page=${limit}`
     ).pipe(
@@ -24,6 +24,8 @@ export class GitHubService {
   }
 
   getUser(login: string): Observable<User> {
-    return this.httpClient.get<User>(`${APP_CONSTANTS.USERS_API}/${login}`);
+    return this.httpClient.get<User>(`${APP_CONSTANTS.USERS_API}/${login}`).pipe(
+      catchError(error => throwError(error))
+    );
   }
 }

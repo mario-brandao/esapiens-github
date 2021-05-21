@@ -1,29 +1,34 @@
 
-<div class="search" [ngClass]="{cover: root || slideIn}">
+<div class="search" [ngClass]="{cover: root || slideIn, root: root}">
   <button class="search-close btn-clear" (click)="leave()">x</button>
 
   <div class="container">
-    <form [formGroup]="form" class="search-form">
+    <form [formGroup]="form" class="search-form row center-xs">
       <input
         type="text"
         name="q"
         placeholder="Search a user..."
         formControlName="query"
         autocomplete="off"
-        class="form-field"
+        class="form-field col-xs-12 col-md-6 col-lg-4"
       >
     </form>
 
-    <app-users-list
-      *ngIf="results?.length; else loadingError;"
-      [users]="results"
-      [loading]="loading"
-      (loadMore)="search(true)"
-      (leave)="leave()">
-    </app-users-list>
+    <div class="row center-xs">
+      <div class="col-xs-12 col-md-8 col-lg-6">
+        <app-users-list
+          *ngIf="results?.length; else loadingError;"
+          [users]="results"
+          [loading]="loading"
+          (loadMore)="search(true)"
+          (leave)="leave()">
+        </app-users-list>
 
-    <p *ngIf="loading" class="app-loader">Loading...</p>
+        <p *ngIf="loading" class="app-loader">Loading...</p>
 
-    <p *ngIf="loadingError">Loading error, please try again later.</p>
+        <p *ngIf="loadingError">Loading error, please try again later.</p>
+      </div>
+    </div>
+
   </div>
 </div>

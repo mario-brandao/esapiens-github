@@ -1,13 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { TagComponent } from './tag/tag.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
-import { RouterModule } from '@angular/router';
+
 
 
 @NgModule({
-  declarations: [UserComponent],
+  declarations: [
+    UserComponent,
+    TagComponent
+  ],
   imports: [
     CommonModule,
     UserRoutingModule,

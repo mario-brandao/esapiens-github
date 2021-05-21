@@ -1,14 +1,37 @@
 
-<div *ngIf="user$ | async as user; else loadingError" class="user-details">
-  <div class="user-thumbnail">
-    <img src="{{ user.avatar_url }}" alt="{{ user.login }}">
-  </div>
-  <h2 class="user-name">{{ user.name }}</h2>
-</div>
 
-<ng-template #loadingError>
-  <div *ngIf="error$ | async; else loading">Loading error, try another user.</div>
-  <ng-template #loading>
-    Loading...
-  </ng-template>
-</ng-template>
+<div class="container">
+  <div class="row">
+    <div *ngIf="user" class="user-details col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-md-3">
+          <div class="user-avatar">
+            <img src="{{ user.avatar_url }}" alt="{{ user.login }}" class="user-avatar-img">
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-8 col-md-offset-1">
+          <h2 *ngIf="user.name" class="user-name">{{ user.name }}</h2>
+          <p *ngIf="user.company" class="user-company">{{ user.company }}</p>
+          <p *ngIf="user.email" class="user-email">{{ user.email }}</p>
+          <p *ngIf="user.bio" class="user-bio">{{ user.bio }}</p>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <app-tag [data]="user.followers" info="Followers"></app-tag>
+              <app-tag [data]="user.following" info="Following"></app-tag>
+            </div>
+          </div>
+        </div>
+
+        <!-- repositories/sorting -->
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading || loadingError" class="row">
+    <div class="col-xs-12">
+      <p *ngIf="loading">Loading...</p>
+      <p *ngIf="loadingError">Loading error, try another user.</p>
+    </div>
+  </div>
+</div>
