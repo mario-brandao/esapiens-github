@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { APP_CONSTANTS } from 'src/app/app.constants';
+import { Repository } from 'src/app/interfaces/repository';
 import { User } from 'src/app/interfaces/user';
 import { GitHubService } from 'src/app/services/github/github.service';
 
@@ -17,6 +19,7 @@ export class UserComponent implements OnInit, OnDestroy {
   user: User;
   loading: boolean;
   loadingError: boolean;
+  repos: Repository[];
 
   subscriptions: Subscription;
 
@@ -31,7 +34,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.get();
+    this.getUser();
     this.watchRouteChanges();
   }
 
@@ -43,7 +46,19 @@ export class UserComponent implements OnInit, OnDestroy {
     this.userLoginParam = this.activatedRoute.snapshot.paramMap.get('login');
   }
 
-  get(): void {
+  watchRouteChanges(): void {
+    this.router.events.subscribe((event: any) => {
+      if (
+        event instanceof NavigationEnd &&
+        !event.urlAfterRedirects.includes(APP_CONSTANTS.REPO_ROUTE)
+      ) {
+        this.getUserLoginParam();
+        this.getUser();
+      }
+    });
+  }
+
+  getUser(): void {
     this.loading = true;
     this.loadingError = false;
 
@@ -56,15 +71,6 @@ export class UserComponent implements OnInit, OnDestroy {
       this.loading = false;
     });
     this.subscriptions.add(userObs);
-  }
-
-  watchRouteChanges(): void {
-    this.router.events.subscribe((event: any) => {
-      if (event instanceof NavigationEnd) {
-        this.getUserLoginParam();
-        this.get();
-      }
-    });
   }
 
 }

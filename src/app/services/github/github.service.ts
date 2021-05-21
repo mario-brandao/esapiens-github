@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { APP_CONSTANTS } from 'src/app/app.constants';
+import { Repository } from 'src/app/interfaces/repository';
 import { User } from 'src/app/interfaces/user';
 
 @Injectable({
@@ -23,8 +24,20 @@ export class GitHubService {
     );
   }
 
-  getUser(login: string): Observable<User> {
-    return this.httpClient.get<User>(`${APP_CONSTANTS.USERS_API}/${login}`).pipe(
+  getUser(user: string): Observable<User> {
+    return this.httpClient.get<User>(`${APP_CONSTANTS.USERS_API}/${user}`).pipe(
+      catchError(error => throwError(error))
+    );
+  }
+
+  getRepos(user: string): Observable<Repository[]> {
+    return this.httpClient.get<Repository[]>(`${APP_CONSTANTS.USERS_API}/${user}/${APP_CONSTANTS.API_TERMS.REPOS}`).pipe(
+      catchError(error => throwError(error))
+    );
+  }
+
+  getRepoDetails(user: string, repo: string): Observable<Repository> {
+    return this.httpClient.get<Repository>(`${APP_CONSTANTS.REPO_API}/${user}/${repo}`).pipe(
       catchError(error => throwError(error))
     );
   }

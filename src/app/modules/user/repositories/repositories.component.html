@@ -1,0 +1,14 @@
+
+<div class="repos">
+  <div *ngFor="let repo of repos" class="repo-item">
+    <h3 class="repo-name">{{ repo.name }}</h3>
+
+    <p *ngIf="repo.stargazers_count">Stars {{ repo.stargazers_count }}</p>
+    <p *ngIf="repo.watchers">Watchers {{ repo.watchers }}</p>
+    <p *ngIf="repo.forks">Forks {{ repo.forks }}</p>
+    <p *ngIf="repo.open_issues">Open_issues {{ repo.open_issues }}</p>
+    <p *ngIf="repo.language">{{ repo.language }}</p>
+    <p *ngIf="repo.description">{{ repo.description }}</p>
+    <a [routerLink]="[repoDetails, repo.name]">See more</a>
+  </div>
+</div>
