@@ -3,6 +3,12 @@
 
 <div class="container">
   <div class="row center-xs">
+    <div *ngIf="loading || loadingError" class="col-xs-12">
+      <app-loader *ngIf="loading"></app-loader>
+
+      <p *ngIf="loadingError">Loading error, please try again later.</p>
+    </div>
+
     <div *ngIf="repo" class="repo-details col-xs-12 col-md-8 col-lg-6">
 
       <h2 class="repo-name">{{ repo.name }}</h2>
