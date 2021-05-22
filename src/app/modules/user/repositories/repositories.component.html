@@ -1,11 +1,16 @@
 
 <div class="repos">
-
   <p class="repos-sort">Ordering by stars count:
     <button class="btn-primary" (click)="toggleSort()">
       <i class="fas fa-angle-double-{{ isSortingDesc ? 'down' : 'up' }}"></i>
     </button>
   </p>
+
+  <div *ngIf="loading || loadingError" class="col-xs-12">
+    <app-loader *ngIf="loading"></app-loader>
+
+    <p *ngIf="loadingError">Loading error, please try again later.</p>
+  </div>
 
   <div *ngFor="let repo of repos" class="repo-card">
     <h3 class="repo-name">{{ repo.name }}</h3>

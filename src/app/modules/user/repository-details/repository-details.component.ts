@@ -12,7 +12,6 @@ import { GitHubService } from 'src/app/services/github/github.service';
 })
 export class RepositoryDetailsComponent implements AfterViewInit {
 
-
   user: string;
   name: string;
 
@@ -26,6 +25,8 @@ export class RepositoryDetailsComponent implements AfterViewInit {
     private gitHubService: GitHubService,
     private toastr: ToastrService,
   ) {
+    this.loading = true;
+    this.loadingError = false;
     this.subscriptions = new Subscription();
     this.getRouteParams();
   }

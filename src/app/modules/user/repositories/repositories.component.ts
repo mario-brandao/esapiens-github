@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { APP_CONSTANTS } from 'src/app/app.constants';
@@ -10,13 +10,14 @@ import { GitHubService } from 'src/app/services/github/github.service';
   templateUrl: './repositories.component.html',
   styleUrls: ['./repositories.component.scss']
 })
-export class RepositoriesComponent implements AfterViewInit, OnDestroy {
+export class RepositoriesComponent implements OnChanges, OnDestroy {
 
-  @Input() repos: Repository[];
   @Input() user: string;
 
-  loadingRepos: boolean;
-  loadingReposError: boolean;
+  repos: Repository[];
+
+  loading: boolean;
+  loadingError: boolean;
   repoDetails: string;
 
   isSortingDesc: boolean;
@@ -27,21 +28,26 @@ export class RepositoriesComponent implements AfterViewInit, OnDestroy {
     private gitHubService: GitHubService,
     private toastr: ToastrService,
   ) {
+    this.repos = [];
+    this.loading = true;
+    this.loadingError = false;
     this.repoDetails = APP_CONSTANTS.REPO_ROUTE;
     this.subscriptions = new Subscription();
   }
 
-  ngAfterViewInit(): void {
+  ngOnChanges(): void {
     this.getRepositories();
   }
 
   ngOnDestroy(): void {
+    this.repos = [];
     this.subscriptions.unsubscribe();
   }
 
   getRepositories(): void {
-    this.loadingRepos = true;
-    this.loadingReposError = false;
+    this.repos = [];
+    this.loading = true;
+    this.loadingError = false;
 
     const reposObs = this.gitHubService.getRepos(this.user).subscribe(
       (repos: Repository[]) => {
@@ -49,9 +55,9 @@ export class RepositoriesComponent implements AfterViewInit, OnDestroy {
         this.sortDesc();
       }, (error) => {
         this.toastr.error(error.message);
-        this.loadingReposError = true;
+        this.loadingError = true;
       }, () => {
-        this.loadingRepos = false;
+        this.loading = false;
       }
     );
     this.subscriptions.add(reposObs);
