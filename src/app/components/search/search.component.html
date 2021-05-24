@@ -27,7 +27,7 @@
 
     <div class="row center-xs">
       <div class="col-xs-12 col-md-8 col-lg-6">
-        <app-loader *ngIf="loading"></app-loader>
+        <app-loader *ngIf="loading && !results?.length"></app-loader>
 
         <app-users-list
           *ngIf="results?.length; else loadingError;"

@@ -20,8 +20,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   form: FormGroup;
   results: User[];
   page: number;
-  currQueryLength: number;
-  currResultsLength: number;
+  lastQueryStr: string;
   loadingError: boolean;
   loading: boolean;
   slideIn: boolean;
@@ -33,7 +32,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     private location: Location
   ) {
     this.page = 1;
-    this.currResultsLength = 0;
     this.slideIn = false;
     this.results = [];
     this.subscriptions = new Subscription();
@@ -59,21 +57,18 @@ export class SearchComponent implements OnInit, OnDestroy {
       if (query && query.length >= 2) {
         this.search();
       } else {
-        this.resetParams();
+        this.reset();
       }
     });
   }
 
-  reset(): void {
-    this.form.reset();
-    this.resetParams();
+  reset(force?: boolean): void {
     this.results = [];
-  }
+    this.page = 1;
 
-  resetParams(): void {
-    this.page = 0;
-    this.currResultsLength = 0;
-    delete this.currQueryLength;
+    if (force) {
+      this.form.reset();
+    }
   }
 
   animateResults(): void {
@@ -86,7 +81,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   leave(): void {
     this.animateBack();
-    this.reset();
+    this.reset(true);
   }
 
   navigateBack(): void {
@@ -97,17 +92,18 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.loadingError = false;
     this.loading = true;
 
-    const page = pagination ? this.page : 1;
+    if (!pagination) {
+      this.reset();
+    }
 
-    const searchObs = this.gitHubService.searchUsers(this.queryStr, page).subscribe(
-      ({users, length}) => {
+    this.lastQueryStr = this.queryStr;
+
+    const searchObs = this.gitHubService.searchUsers(this.queryStr, this.page).subscribe(
+      ({users}) => {
         const animationTimeout = this.slideIn === true ? 0 : 390;
-
         this.animateResults();
 
         setTimeout(() => {
-          this.currResultsLength += length;
-          this.currQueryLength = length;
           this.page++;
           this.results.push(...users);
         }, animationTimeout);
