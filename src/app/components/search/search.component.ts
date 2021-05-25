@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -17,6 +17,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   @Input() root: boolean;
 
+  @ViewChild('field') field: any;
+
   form: FormGroup;
   results: User[];
   page: number;
@@ -24,6 +26,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   loadingError: boolean;
   loading: boolean;
   slideIn: boolean;
+  searchAttempt: number;
   subscriptions: Subscription;
 
   constructor(
@@ -31,6 +34,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private location: Location
   ) {
+    this.searchAttempt = 0;
     this.page = 1;
     this.slideIn = false;
     this.results = [];
@@ -88,6 +92,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
+  prepareNewAttempt(): void {
+    this.searchAttempt = 0;
+    this.reset(true);
+    this.field.nativeElement.focus();
+  }
+
   search(pagination?: boolean): void {
     this.loadingError = false;
     this.loading = true;
@@ -106,6 +116,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         setTimeout(() => {
           this.page++;
           this.results.push(...users);
+          this.searchAttempt++;
         }, animationTimeout);
 
       }, ({error}) => {

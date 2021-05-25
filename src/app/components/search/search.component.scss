@@ -60,3 +60,12 @@
     width: 100%;
   }
 }
+
+.not-found {
+  font-size: 8rem;
+
+  &-small {
+    display: block;
+    font-size: 1.4rem;
+  }
+}

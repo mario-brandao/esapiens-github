@@ -156,6 +156,17 @@ describe('SearchComponent', () => {
       expect(location.back).toHaveBeenCalled();
     });
 
+    it(`#prepareNewAttempt should reset props and focus field`, () => {
+      spyOn(component, 'reset');
+      component.prepareNewAttempt();
+      fixture.detectChanges();
+      fixture.whenStable().then(() => {
+        expect(component.searchAttempt).toEqual(0);
+        expect(component.reset).toHaveBeenCalledWith(true);
+        expect(component.form.touched).toBeTrue();
+      });
+    });
+
     describe('#search', () => {
       it(`should reset props`, () => {
         spyOn(gitHubService, 'searchUsers').and.callThrough();
