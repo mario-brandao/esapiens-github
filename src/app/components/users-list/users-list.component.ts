@@ -22,7 +22,7 @@ export class UsersListComponent implements AfterViewInit, OnDestroy {
   userRoute: string;
   scrollOffset: number;
 
-  private subscriptions: Subscription;
+  subscriptions: Subscription;
 
   constructor() {
     this.userRoute = APP_CONSTANTS.USER_ROUTE;

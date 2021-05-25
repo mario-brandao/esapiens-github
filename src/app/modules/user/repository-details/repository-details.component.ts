@@ -32,7 +32,7 @@ export class RepositoryDetailsComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.getRepositories();
+    this.getRepository();
   }
 
   ngOnDestroy(): void {
@@ -44,7 +44,7 @@ export class RepositoryDetailsComponent implements AfterViewInit {
     this.name = this.activatedRoute.snapshot.paramMap.get('name');
   }
 
-  getRepositories(): void {
+  getRepository(): void {
     this.loading = true;
     this.loadingError = false;
 

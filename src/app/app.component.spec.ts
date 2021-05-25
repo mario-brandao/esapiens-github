@@ -1,35 +1,58 @@
-import { TestBed, async } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
+import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
+import { SearchComponent } from './components/search/search.component';
 
 describe('AppComponent', () => {
+  let app: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        SearchComponent,
       ],
     }).compileComponents();
+
   }));
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    app = fixture.componentInstance;
   });
 
-  it(`should have as title 'esapiens-github'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('esapiens-github');
+  describe('Smoke tests', () => {
+    it('should create the app', () => {
+      expect(app).toBeTruthy();
+    });
+
+    it(`#isRoot should be true`, () => {
+      expect(app.isRoot).toBeTrue();
+    });
+
+    it(`#watchRouteChanges should be defined`, () => {
+      expect(app.watchRouteChanges).toBeDefined();
+    });
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('esapiens-github app is running!');
+  describe('Functionality tests', () => {
+    it(`#ngOnInit should trigger #watchRouteChanges`, () => {
+      spyOn(app, 'watchRouteChanges');
+      fixture.detectChanges();
+      expect(app.ngOnInit).toBeDefined();
+      expect(app.watchRouteChanges).toHaveBeenCalled();
+    });
   });
+
 });
