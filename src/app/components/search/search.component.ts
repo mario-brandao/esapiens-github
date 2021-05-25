@@ -119,10 +119,10 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.searchAttempt++;
         }, animationTimeout);
 
-      }, ({error}) => {
-        this.toastr.error(error.message);
-      }, () => {
         this.loading = false;
+      }, ({error}) => {
+        this.loading = false;
+        this.toastr.error(error.message);
       }
     );
 

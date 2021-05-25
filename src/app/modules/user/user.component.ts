@@ -65,10 +65,10 @@ export class UserComponent implements OnInit, OnDestroy {
 
     const userObs = this.gitHubService.getUser(this.userLoginParam).subscribe((user: User) => {
       this.user = user;
+      this.loading = false;
     }, (error) => {
       this.toastr.error(error.message);
       this.loadingError = true;
-    }, () => {
       this.loading = false;
     });
     this.subscriptions.add(userObs);

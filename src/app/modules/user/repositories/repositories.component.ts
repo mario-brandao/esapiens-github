@@ -53,10 +53,10 @@ export class RepositoriesComponent implements OnChanges, OnDestroy {
       (repos: Repository[]) => {
         this.repos = repos;
         this.sortDesc();
+        this.loading = false;
       }, (error) => {
         this.toastr.error(error.message);
         this.loadingError = true;
-      }, () => {
         this.loading = false;
       }
     );

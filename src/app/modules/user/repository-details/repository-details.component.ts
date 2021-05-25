@@ -51,10 +51,10 @@ export class RepositoryDetailsComponent implements AfterViewInit {
     const reposObs = this.gitHubService.getRepoDetails(this.user, this.name).subscribe(
       (repo: Repository) => {
         this.repo = repo;
+        this.loading = false;
       }, (error) => {
         this.toastr.error(error.message);
         this.loadingError = true;
-      }, () => {
         this.loading = false;
       }
     );
