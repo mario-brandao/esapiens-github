@@ -40,7 +40,7 @@
         </app-users-list>
 
 
-        <p *ngIf="!loading && !results?.length && !loadingError && searchAttempt" class="not-found">
+        <p *ngIf="!loading && !results?.length && !loadingError && searchAttempt && (root || slideIn)" class="not-found">
           404 <i class="not-found-small">User not found. Please, try to search for anorther user.</i>
           <button class="btn-primary" (click)="prepareNewAttempt()">OK</button>
         </p>
